@@ -11,21 +11,10 @@ function Feed() {
   const [posts, setPosts] = useState([]);
 
   useEffect(() => {
-    // const querySnapshot = await getDocs(collection(db, "posts"));
-    // querySnapshot.forEach((doc) => {
-    //     setPosts(snapshot.docs.map((doc) => doc.data()))
-    // });
-
     const q = query(collection(db, "posts"))
     const unsub = onSnapshot(q, (querySnapshot) => {
         setPosts(querySnapshot.docs.map((doc) => doc.data()));
     });
-
-
-
-//     db.collection("posts").onSnapshot((snapshot) =>{
-//       setPosts(snapshot.docs.map((doc) => doc.data()))
-//    });
   }, []);
 
   return (
@@ -36,7 +25,7 @@ function Feed() {
 
       <TweetBox />
 
-      {/* <FlipMove> */}
+      <FlipMove>
         {posts.map((post) => (
           <Post
             key={post.text}
@@ -49,7 +38,7 @@ function Feed() {
           />
         ))
         }
-      {/* </FlipMove> */}
+      </FlipMove>
     </div>
   );
 }
